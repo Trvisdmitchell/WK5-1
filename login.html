@@ -1,0 +1,34 @@
+<!--UAT Spage login Page
+    written by: Travis Mitchell
+    tramitc1@uat.edu
+    27May2021-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="loginCode.js"> //link to the js file
+    </script>
+    <title>
+        UAT Space Login Page -The Start To Something Amazing-
+        <!--Title of web page-->
+    </title>
+</head>
+
+<body>
+
+    <h1>Welcome To The UAT Space Login Page, Please log in.<!--Head Text of the page-->
+    </h1>
+    <p id="loginStatus"><!--Displays the status of the login for the use or if there is an error  -->
+        Status of login...
+    </p>
+    <form id="creaditSubmit" onsubmit="return false">
+        First Name: <input type="Text" id="fname" /><BR>
+        Last Name: <input type="Text" id="lname" /><BR>
+        Badge Number: <input type="BadgeNumber" id="badgeID" /><BR>
+        <input Type="submit" onclick="CheckCreds();" />
+    </form>
+
+</body>
+
+
+</html>

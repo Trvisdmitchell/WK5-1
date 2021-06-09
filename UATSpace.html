@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--UAT Spage Page
+    written by: Travis Mitchell
+    tramitc1@uat.edu
+    11May2021-->
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <!--Link to attache the styles.css file to change the background.-->
+    <script src="code.js"></script>
+    <script src="dataLoader-1.js"></script>
+    <title>
+        Travis Mitchell UAT Space Page
+        <!--Title of web page.-->
+    </title>
+</head>
+
+<body>
+    <!-- needed for the DOM(document object model)-->
+    <script>
+        //creat some variables ever 5 seconds this command updates diplay
+        var theTime = new Date();
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_iteration = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        //to get data for table 
+        var data = getData();
+
+        //data from the data loader to table
+
+        function updateDisplay() {
+
+            theTime = new Date();
+
+            //fill in the table
+            var timeRead = data[index].time_seconds;
+            if (timeRead >= 10) {
+                document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds");
+                document.getElementById("data").rows["Latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+                document.getElementById("data").rows["Longitude"].innerHTML = dataRow("Longitude", data[index].longitude, " ");
+                document.getElementById("data").rows["GPS_Altitude"].innerHTML = dataRow("GPS_Altitude", data[index].gps_altitude, " ");
+                document.getElementById("data").rows["BMP_sensor_Altitude"].innerHTML = dataRow("BMP_sensor_Altitude", data[index].bpmSensor_altitude, " ");
+                document.getElementById("data").rows["BMP_Sensor_pressure"].innerHTML = dataRow("BMP_Sensor_pressure", data[index].bpmSensor_pressurer, " ");
+                document.getElementById("data").rows["BMP_Sensor_Temperature"].innerHTML = dataRow("BMP_Sensor_Temperature", data[index].bpmSensor_temp, " ");
+                document.getElementById("data").rows["Digital_Sensor_Trmperature"].innerHTML = dataRow("Digital_Sensor_Trmperature", data[index].digSensor_temp, " ");
+                document.getElementById("data").rows["CSS_Sensor_Temprature"].innerHTML = dataRow("CSS_Sensor_Temprature", data[index].cssSensor_temp, " ");
+                document.getElementById("data").rows["CSS_Sensor_eC02"].innerHTML = dataRow("CSS_Sensor_eC02", data[index].cssSensor_eCo2, " ");
+                document.getElementById("data").rows["CSS_Sensor_TVOC"].innerHTML = dataRow("CSS_Sensor_TVOC", data[index].cssSensor_TVOC, " ");
+                document.getElementById("data").rows["UV"].innerHTML = dataRow("UV", data[index].UV, " ");
+                document.getElementById("data").rows["Accel_X"].innerHTML = dataRow("Accel_X", data[index].accelX, " ");
+                document.getElementById("data").rows["Accel_Y"].innerHTML = dataRow("Accel_Y", data[index].accelY, " ");
+                document.getElementById("data").rows["Accel_Z"].innerHTML = dataRow("Accel_Z", data[index].accleZ, " ");
+                document.getElementById("data").rows["Magnetic_X"].innerHTML = dataRow("Magnetic_X", data[index].magneticX, " ");
+                document.getElementById("data").rows["Magnetic_Y"].innerHTML = dataRow("Magnetic_Y", data[index].magneticY, " ");
+                document.getElementById("data").rows["Magnetic_Z"].innerHTML = dataRow("Magnetic_Z", data[index].magneticZ, " ");
+                document.getElementById("data").rows["Gyro_X"].innerHTML = dataRow("Gyro_X", data[index].gyroX, " ");
+                document.getElementById("data").rows["Gyro_Y"].innerHTML = dataRow("Gyro_Y", data[index].gyroY, " ");
+                document.getElementById("data").rows["Gyro_Z"].innerHTML = dataRow("Gyro_Z", data[index].gyroZ, " ");
+            }
+            if (index < 500) {
+                index++
+            } else {
+                index = 0;
+            }
+        }
+
+
+    </script>
+
+    <!-- Making a tableto hold h1 and title and jpg-->
+    <table>
+        <td>
+            <img src="UATSpace- logo.png">
+            <!--UAT space logo image -->
+        </td>
+        <td>
+            <h1 class="h1">
+                -UAT Space Program-
+                <!--Header for webpage-->
+            </h1>
+        </td>
+    </table>
+    <table border="2" width="75%" id="data">
+        <!--table for our data/our border and takes up 55% of page width-->
+        <col style="width: 35%;">
+        <!--sets column width-->
+        <col style="width: 35%;">
+        <!--sets column width-->
+        <thead>
+            <tr style="font-family: fantasy;">
+                <!--Font change-->
+                <th>Data Type</th>
+                <th>Reading</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="seconds"></tr>
+            <tr id="Latitude"></tr>
+            <tr id="Longitude"></tr>
+            <tr id="GPS_Altitude"></tr>
+            <tr id="BMP_sensor_Altitude"></tr>
+            <tr id="BMP_Sensor_pressure"></tr>
+            <tr id="BMP_Sensor_Temperature"></tr>
+            <tr id="Digital_Sensor_Trmperature"></tr>
+            <tr id="CSS_Sensor_Temprature"></tr>
+            <tr id="CSS_Sensor_eC02"></tr>
+            <tr id="CSS_Sensor_TVOC"></tr>
+            <tr id="UV"></tr>
+            <tr id="Accel_X"></tr>
+            <tr id="Accel_Y"></tr>
+            <tr id="Accel_Z"></tr>
+            <tr id="Magnetic_X"></tr>
+            <tr id="Magnetic_Y"></tr>
+            <tr id="Magnetic_Z"></tr>
+            <tr id="Gyro_X"></tr>
+            <tr id="Gyro_Y"></tr>
+            <tr id="Gyro_Z"></tr>
+
+        </tbody>
+
+
+    </table>
+
+
+
+    <script>
+        //Cool javascrip stuff happens between the <scrips>
+    </script>
+
+    <br>
+    <!--Used to skip a line on web page-->
+    <p id="CountdownTimer">Countdown Status....</p>
+    <button class="button" id="startButton" onclick="Start();">Start</button>
+    <!--Start button on web page, wil run the code "code.js" when pressed-->
+    <button class="button" id="stopButton" onclick="Stop();">Stop</button>
+    <!--Stop button on web page-->
+    <br>
+    <br>
+    <button class="button" onclick="playstation();">Play Sound</button><br>
+    <!--button to play mp3 file-->
+
+    <script>
+        //we do not need alert anymore.
+        //alert("ALERT!!! This is a Test of the alert function.");
+        //alert that will first pop up when you open the page
+    </script>
+
+    <!--Space for craps game.-->
+    <br>
+    <!--Used to skip a line on web page-->
+    <br>
+
+    <h2>-Space Craps-</h2>
+    <br>
+    <p1>Welcome to Space Craps!! Our mission is to provide you with a fun way to lose your money in a classic game of
+        chance by playing Craps.<br>
+        If you never played before, don't worry. I Will walk you through it. All you have to do is press the button that
+        says Play Craps. It will then roll two dice. <br>
+        If you get an even pair of numbers, you win. If you get a 7 or 11, you lose. If you get anything in between, it
+        will ask you to roll again.<br>
+        It's that easy.
+        <br>With your losses, there is no telling what mysteries we will uncover about our universe. <br>
+        So please don't hesitate to spend your life savings and show your support for the search for knowledge here at
+        <br>"Space Craps."
+    </p1>
+    <br>
+    <br>
+    <p>----------------------------------------------------------------------------------------------------------------
+    </p>
+    <div id="Die1Results">Die One ...</div> <br>
+    <!--Shows Results for Die one on Web Page.-->
+    <div id="Die2Results">Die Two ...</div> <br>
+    <!--Shows Rusults for Die Two on Web Page.-->
+    <div id="SumResults">Sum of Die...</div> <br>
+    <!--Show the Sum of Die one & Two on web Page.-->
+    <div id="CrapsResults">Space Craps Game Status...</div>
+    <p>----------------------------------------------------------------------------------------------------------------
+    </p>
+    <button class="button" onclick="PlayCraps();">Play Craps</button>
+    <!--Button to start craps game on webpage-->
